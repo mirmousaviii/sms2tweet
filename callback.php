@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once('db.php');
 require_once('twitteroauth/twitteroauth.php');
 require_once('config.php');
 
@@ -25,16 +26,20 @@ unset($_SESSION['oauth_token_secret']);
 
 /* If HTTP response is 200 continue otherwise send to connect page to retry */
 if (200 == $connection->http_code) {
-    /* The user has been verified and the access tokens can be saved for future use */
-    //$_SESSION['status'] = 'verified';
-    //header('Location: ./index.php');
-    //print_r($_SESSION);
-    $accessToken = $_SESSION['access_token'];
-    $database = new db(DB_USERNAME, DB_PASSWORD, "localhost", DB_NAME, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-    $database ->insertRow("INSERT INTO `users`
+
+    if (!isset($_POST['phone_number']))
+    {
+        include('register.html.inc');
+
+    } else {
+        $accessToken = $_SESSION['access_token'];
+        $database = new db(DB_USERNAME, DB_PASSWORD, "localhost", DB_NAME, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+        $database ->insertRow("INSERT INTO `users`
                                         (oauth_token, oauth_token_secret, user_id, screen_name, phone_number)
                                         VALUES (?, ?, ?, ?, ?)",
-                            array($accessToken['oauth_token'], $accessToken['oauth_token_secret'], $accessToken['user_id'], $accessToken['screen_name'], '09120000000'));
+            array($accessToken['oauth_token'], $accessToken['oauth_token_secret'], $accessToken['user_id'], $accessToken['screen_name'], $_POST['phone_number']));
+    }
+
 
 
 } else {
