@@ -8,6 +8,7 @@ define('DB_USERNAME', '');
 define('DB_PASSWORD', '');
 define('DB_NAME', '');
 
-
 define('SMS_NUMBER', '30008888888888');
+
+define('SERVER_IP', '');
 
