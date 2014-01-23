@@ -12,7 +12,7 @@ if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['o
     header('Location: ./clearsessions.php');
 }
 
-if ( isset($_SESSION['oauth_token']) )
+if ( isset($_SESSION['oauth_token']) || isset($_SESSION['access_token']) )
 {
     if (!isset($_POST['phone_number']))
     {
