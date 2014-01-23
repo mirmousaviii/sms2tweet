@@ -41,6 +41,8 @@ if ( isset($_SESSION['oauth_token']) || isset($_SESSION['access_token']) )
 
     include('register.html.inc');
 
+    $database ->Disconnect();
+    session_destroy();
 }
 else
 {
