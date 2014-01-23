@@ -7,3 +7,7 @@ define('OAUTH_CALLBACK', 'http://example.com/sms2twitt/callback.php');
 define('DB_USERNAME', '');
 define('DB_PASSWORD', '');
 define('DB_NAME', '');
+
+
+define('SMS_NUMBER', '30008888888888');
+
