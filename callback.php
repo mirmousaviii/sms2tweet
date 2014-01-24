@@ -36,12 +36,11 @@ if ( isset($_SESSION['oauth_token']) || isset($_SESSION['access_token']) )
                                         (oauth_token, oauth_token_secret, user_id, screen_name, phone_number)
                                         VALUES (?, ?, ?, ?, ?)",
             array($accessToken['oauth_token'], $accessToken['oauth_token_secret'], $accessToken['user_id'], $accessToken['screen_name'], $_POST['phone_number']));
-
+        $database ->Disconnect();
     }
 
     include('register.html.inc');
 
-    $database ->Disconnect();
     session_destroy();
 }
 else
